@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.mapper.MbtiMapper">
+	<select id="selectMbtiList" resultType="MbtiVO">
+		select 
+			MT_SORT
+			, MT_TYPE
+			, MT_TITLE
+			, MT_CONTENT
+		from TB_MBTIDESC
+	</select>
+	
+	<select id="selectMbti" resultType="MbtiVO">
+		select 
+			MT_SORT
+			, MT_TYPE
+			, MT_TITLE
+			, MT_CONTENT
+		from TB_MBTIDESC
+		where MT_TYPE = #{MT_TYPE}
+	</select>
+	
+	<insert id="insertMbti" parameterType="MbtiVO">
+		insert into TB_MBTIDESC(
+			MT_TYPE
+			, MT_TITLE
+			, MT_CONTENT
+		)values(
+			#{mtType}
+			, #{mtTitle}
+			, #{mtContent}
+		)
+	</insert>
+	
+	<update id="updateMbti">
+		update TB_MBTIDESC set 
+		MT_TITLE = #{mtTitle}, MT_CONTENT = #{mtContent}
+		where MT_TYPE = #{mtType}
+	</update>
+	
+	<delete id="deleteMbti" parameterType="String">
+		delete from TB_MBTIDESC
+		where MT_TYPE= #{mtType}
+	</delete>
+</mapper>
